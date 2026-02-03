@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: metadata                
+    database: SOURCE            
+    schema: metadata
+    quoting:
+            database: false
+            schema: false
+            identifier: false       
+    tables:
+      - name: source_metadata
+  - name: raw                
+    database: SOURCE            
+    schema: FIDELITY_R
+    quoting:
+            database: false
+            schema: false
+            identifier: false       
+    tables:
+      - name: GNUMS
+        columns:
+          - name: DATA
+            tests:
+              - fixedwidth_footer_count:
+                  footer_start_pos: 23
+                  footer_length: 15
+      - name: NAME_AND_ADDRESS
+        columns:
+          - name: DATA
+            tests:
+              - fixedwidth_footer_count:
+                  footer_start_pos: 42
+                  footer_length: 15
